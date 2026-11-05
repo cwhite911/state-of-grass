@@ -1,0 +1,42 @@
+<section id="python-api-grass-tools" data-label="Python API: grass.tools">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Python API: grass.tools</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:34px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Tools as native Python functions</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Direct NumPy array and raster pack I/O</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Smart return values, proper exceptions</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>RegionManager and MaskManager context managers in grass.script</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Václav Petráš and Anna Petrášová, with Natrx · NSF SBIR #2322073</p>
+  </div>
+  <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:44px 48px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.55;white-space:pre-wrap;overflow:hidden">import numpy as np
+from grass.tools import Tools
+
+tools = Tools()
+tools.g_region(raster="elevation")
+tools.r_slope_aspect(
+    elevation="elevation",
+    slope="slope",
+)
+stats = tools.r_univar(
+    map="slope", format="json"
+)
+print(stats["mean"])
+
+array = tools.r_mapcalc_simple(
+    expression="A * 2", a="slope",
+    output=np.array,
+)</pre>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">The headline for Python users. grass.tools exposes GRASS tools as Python functions with NumPy I/O, parsed return values, and exceptions. Developed by Vaclav Petras and Anna Petrasova with Natrx under NSF SBIR 2322073.</aside>
+</section>

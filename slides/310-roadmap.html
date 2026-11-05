@@ -1,0 +1,39 @@
+<section id="roadmap" data-label="Roadmap">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:52px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Looking ahead</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Roadmap: GRASS 8.6 and beyond</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">In progress for 8.6</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Jupyter notebooks inside the GUI (merged)</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Test suite migration from gunittest to pytest</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Windows installer built in GitHub Actions; addons compiling on Windows CI</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>SBOM (CycloneDX) and SPDX license headers for supply-chain transparency</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>More parallel tools: r.param.scale, r.geomorphon</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Reproducible random numbers for parallel tools: one seed, same result at any thread count</span></li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">Beyond 8.6</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>OGC 3D Tiles export and grass.jupyter Map3DTiles, funded by the Cesium Ecosystem Grant</span></li>
+        <li style="margin-top:10px;font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#4a787d">Needs new funding</li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>Subcommand interfaces</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>No-project processing</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>Sustained maintenance of conda, CMake, and Windows packaging</span></li>
+      </ul>
+      <p style="margin:0;font-size:30px;line-height:1.4;color:#4e4d4c">Sources: Community Meeting 2026 report · Annual Report 2025</p>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">8.6: Jupyter notebooks in the GUI, pytest migration, Windows installer from GitHub Actions, SBOM and SPDX, parallel r.param.scale and r.geomorphon, and a libgis seed API so parallel tools (r.sim, v.random, r.surf.random, r.mapcalc rand) give the same result at any thread count. Beyond 8.6: 3D Tiles export is funded by the Cesium grant; subcommand interfaces, no-project processing, and sustained packaging maintenance still need funding. Sources: Community Meeting 2026 report and Annual Report 2025.</aside>
+</section>

@@ -1,0 +1,106 @@
+/* ===== GRASS Design System — Colors & Type =====================
+   Source of truth: OSGeo/grass-website themes/grass/assets/css/style.css
+   Brand green #4cb05b, brand blue #00393f
+   Fonts: Sintony self-hosted (400/700 only — no light cut; heading rhythm
+   comes from size + color). Fira Mono via Google Fonts (see styles.css).
+================================================================= */
+@font-face { font-family: 'Sintony'; font-weight: 400; font-style: normal; font-display: swap; src: url('fonts/Sintony-Regular.otf') format('opentype'); }
+@font-face { font-family: 'Sintony'; font-weight: 700; font-style: normal; font-display: swap; src: url('fonts/Sintony-Bold.otf') format('opentype'); }
+:root {
+  /* ---------- TYPE ---------- */
+  --gs-font-sans: 'Sintony', system-ui, sans-serif;
+  --gs-font-light: 'Sintony', sans-serif;    /* maps to 400 — no light cut */
+  --gs-font-regular: 'Sintony', sans-serif;  /* 400 */
+  --gs-font-medium: 'Sintony', sans-serif;   /* maps to 700 */
+  --gs-font-bold: 'Sintony', sans-serif;     /* 700 */
+  --gs-font-mono: 'Fira Mono', ui-monospace, monospace;
+  --gs-fs-h1: 2.25rem;
+  --gs-fs-h2: 2rem;
+  --gs-fs-h3: 1.25rem;
+  --gs-fs-h4: 1.2rem;
+  --gs-fs-h5: 1.1rem;
+  --gs-fs-h6: 1rem;
+  --gs-fs-body: 1rem;
+  --gs-fs-small: .875rem;
+  --gs-fs-bigr: 1.25rem;
+  --gs-lh-body: 1.8; /* @kind other */
+  --gs-lh-tight: 1.3; /* @kind other */
+  --gs-lh-heading: 1.4; /* @kind other */
+  /* ---------- COLORS — BRAND ---------- */
+  --gs-primary: rgb(76, 176, 91);            /* #4cb05b */
+  --gs-primary-light: rgba(76, 176, 91, .541);
+  --gs-primary-lighter: rgba(76, 176, 91, .322);
+  --gs-primary-lightest: rgba(76, 176, 91, .071);
+  --gs-primary-alt: rgb(110, 208, 121);      /* #6ed079 */
+  --gs-primary-alt-light: rgba(110, 208, 121, .541);
+  --gs-primary-l: rgb(135, 233, 145);        /* #87e991 */
+  --gs-primary-d: rgb(8, 139, 54);           /* #088b36 */
+  --gs-secondary: rgb(0, 57, 63);            /* #00393f */
+  --gs-secondary-light: rgba(0, 57, 63, .541);
+  --gs-secondary-lighter: rgba(0, 57, 63, .322);
+  --gs-secondary-lightest: rgba(0, 57, 63, .071);
+  --gs-secondary-alt: rgb(39, 87, 92);       /* #27575c */
+  --gs-secondary-l: rgb(74, 120, 125);       /* #4a787d */
+  --gs-secondary-d: rgb(0, 32, 36);          /* #002024 */
+  --gs-support: rgb(243, 57, 138);           /* #f3398a */
+  --gs-support-dark: rgb(150, 35, 84);
+  --gs-yard-sign: rgb(116, 93, 2);
+  /* ---------- COLORS — NEUTRALS ---------- */
+  --gs-white-base: rgb(255, 255, 255);
+  --gs-white: rgb(247, 247, 247);            /* #f7f7f7 — body bg */
+  --gs-grey-light: rgb(240, 240, 241);
+  --gs-grey-alt: rgb(216, 216, 216);
+  --gs-grey: rgb(145, 144, 143);
+  --gs-grey-dark: rgb(78, 77, 76);
+  --gs-black: rgb(2, 25, 5);                 /* #021905 — body fg */
+  --gs-black-base: rgb(0, 0, 0);
+  --gs-black-light: rgba(2, 25, 5, .541);
+  --gs-black-lightest: rgba(2, 25, 5, .071);
+  /* ---------- SEMANTIC ROLES ---------- */
+  --gs-bg: var(--gs-white);
+  --gs-bg-alt: var(--gs-grey-light);
+  --gs-bg-inverse: var(--gs-secondary);
+  --gs-fg: var(--gs-black);
+  --gs-fg-muted: var(--gs-grey-dark);
+  --gs-fg-subtle: var(--gs-grey);
+  --gs-fg-inverse: var(--gs-white);
+  --gs-link: var(--gs-primary);
+  --gs-link-hover: var(--gs-primary-d);
+  --gs-border: var(--gs-grey-alt);
+  --gs-border-subtle: var(--gs-grey-light);
+  --gs-focus-ring: var(--gs-primary);
+  --gs-overlay-green: linear-gradient(to bottom, rgba(76,176,91,1) 12%, rgba(76,176,91,.47) 59%, rgba(76,176,91,0) 100%); /* @kind color */
+  --gs-overlay-blue: linear-gradient(to bottom, rgba(0,57,63,.541) 40%, rgba(0,57,63,.322) 80%, rgba(0,57,63,.071) 100%); /* @kind color */
+  /* ---------- SPACING / RADII / SHADOWS ---------- */
+  --gs-space-1: .25rem;  --gs-space-2: .5rem;
+  --gs-space-3: .75rem;  --gs-space-4: 1rem;
+  --gs-space-5: 1.5rem;  --gs-space-6: 2rem;
+  --gs-space-7: 2.5rem;  --gs-space-8: 3rem;
+  --gs-radius-0: 0;        /* default buttons are square-ish */
+  --gs-radius-sm: 4px;
+  --gs-radius-md: 5px;     /* .btn-grass */
+  --gs-radius-lg: 8px;
+  --gs-radius-pill: 30px;  /* .form-control */
+  --gs-shadow-sm: 0 1px 0 rgba(12,13,14,.1), 0 1px 6px rgba(59,64,69,.1);
+  --gs-shadow: 0 5px 15px rgba(2,25,5,.071);
+  --gs-shadow-md: 0 4px 12px rgba(0,0,0,.17);
+  --gs-shadow-lg: 0 14px 25px rgba(0,0,0,.10);
+  --gs-duration: .2s; /* @kind other */
+  --gs-ease: ease; /* @kind other */
+}
+/* ---------- SEMANTIC CSS (raw tokens → element defaults) ---------- */
+html { color-scheme: light; }
+body { font-family: var(--gs-font-sans); font-weight: 400; font-size: var(--gs-fs-body); line-height: var(--gs-lh-body); color: var(--gs-fg); background: var(--gs-bg); -webkit-font-smoothing: antialiased; }
+h1 { font-family: var(--gs-font-bold); font-weight: 700; font-size: var(--gs-fs-h1); line-height: var(--gs-lh-tight); color: var(--gs-secondary-alt); margin: 0 0 1em; }
+h2 { font-family: var(--gs-font-regular); font-weight: 400; font-size: var(--gs-fs-h2); line-height: var(--gs-lh-heading); color: var(--gs-secondary-l); margin: .64em 0; text-transform: capitalize; }
+h3 { font-weight: 700; font-size: var(--gs-fs-h3); line-height: 1.5; color: var(--gs-primary); margin: 1.6em 0 .8em; letter-spacing: -.01em; }
+h4 { font-family: var(--gs-font-bold); font-weight: 700; font-size: var(--gs-fs-h4); color: var(--gs-primary); margin: 1rem 0; letter-spacing: -.01em; }
+h5 { font-weight: 700; font-size: var(--gs-fs-h5); color: var(--gs-black-light); margin: 1rem 0; }
+h6 { font-family: var(--gs-font-regular); font-weight: 400; font-size: var(--gs-fs-h6); color: var(--gs-black-light); margin: 1rem 0 .5rem; }
+p, .paragraph { font-size: var(--gs-fs-body); line-height: var(--gs-lh-body); color: var(--gs-fg); }
+.bigr { font-size: 125%; }
+a { color: var(--gs-link); text-decoration: none; transition: color var(--gs-duration) var(--gs-ease); }
+a:hover, a:focus { color: var(--gs-link-hover); }
+code, pre { font-family: var(--gs-font-mono); color: var(--gs-black-light); }
+blockquote { border-left: 2px solid var(--gs-primary); background: var(--gs-primary-l); color: var(--gs-grey-dark); padding: 10px 40px; margin: 40px 0; font-size: 20px; }
+:focus-visible { outline: 2px solid var(--gs-focus-ring); outline-offset: 2px; }

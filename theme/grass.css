@@ -1,0 +1,67 @@
+/* State of GRASS 2026: reveal.js frame around the Claude Design slides.
+   Slide content carries its own inline styles at a 1920x1080 canvas; this
+   file only keeps reveal.js from restyling it. Brand tokens live in
+   ds/colors_and_type.css (GRASS design system). */
+
+.reveal-viewport { background: #002024; }
+.reveal { font-family: 'Fira Sans', sans-serif; font-size: 36px; color: #021905; }
+.reveal .slides { text-align: left; }
+.reveal .slides > section { top: 0; left: 0; height: 100%; padding: 0; }
+
+.reveal .slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Neutralize reveal.js / design-system element defaults the deck does not expect */
+.reveal .slide h1, .reveal .slide h2, .reveal .slide h3,
+.reveal .slide p, .reveal .slide ul, .reveal .slide ol, .reveal .slide pre,
+.reveal .slide blockquote { margin: 0; }
+.reveal .slide h2 { text-transform: none; }
+.reveal .slide blockquote { border: 0; background: none; padding: 0; font-size: inherit; color: inherit; }
+.reveal .slide img, .reveal .slide video {
+  max-width: none; max-height: none; margin: 0; border: 0; box-shadow: none; background: none;
+}
+.reveal .slide a { text-decoration: none; }
+.reveal .slide a:hover { color: #088b36; }
+.reveal .slide pre { white-space: pre; }
+
+/* <image-slot> replacement */
+.reveal .slide .slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: rgba(127, 127, 127, 0.08);
+}
+.reveal .slide .slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.reveal .slide .slot-rect { border-radius: 0; }
+.reveal .slide .slot-rounded { border-radius: var(--slot-radius, 12px); }
+.reveal .slide .slot-circle { border-radius: 50%; }
+.reveal .slide .slot-pill { border-radius: 9999px; }
+.reveal .slide .slot-empty {
+  display: flex; align-items: center; justify-content: center;
+  border: 2px dashed rgba(2, 25, 5, 0.3); font-size: 24px; color: rgba(2, 25, 5, 0.6);
+}
+
+/* Links stay clickable; reveal controls sit above the slide */
+.reveal .controls { color: #4cb05b; }
+.reveal .progress { color: #4cb05b; height: 4px; }
+.reveal .slide-number { background: transparent; color: #91908f; font-size: 14px; }
+
+/* PDF export (append ?print-pdf to the URL) */
+@media print {
+  .reveal-viewport { background: #fff; }
+}

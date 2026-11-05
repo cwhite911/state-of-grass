@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State of GRASS 2026</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;400;500;700&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+<link rel="stylesheet" href="theme/ds/colors_and_type.css">
+<link rel="stylesheet" href="theme/grass.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section id="title" data-label="Title">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('assets/ds/banner.jpg') center/cover;clip-path:polygon(0 0, 41% 100%, 0 100%)"></div>
+  <div style="position:absolute;inset:0;background:#00393f;clip-path:polygon(100% 0, 100% 100%, 86% 100%)"></div>
+  <img src="assets/ds/grass-white.svg" alt="GRASS" style="position:absolute;left:96px;bottom:72px;width:240px;height:auto">
+  <div style="position:absolute;top:110px;right:330px;width:1000px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:22px">
+    <h1 style="margin:0;font-size:96px;font-weight:700;line-height:1.1;color:#27575c">State of GRASS</h1>
+    <h2 style="margin:0;font-size:44px;font-weight:700;line-height:1.3;color:#27575c">FOSS4G North America 2026</h2>
+    <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.3;color:#27575c">Sacramento, CA · November 2026</h2>
+    <div style="width:860px;height:2px;background:#91908f;margin:26px 0"></div>
+    <span style="font-size:40px;font-weight:400;color:#4e4d4c">Corey T. White, Ph.D.</span>
+    <span style="font-size:32px;line-height:1.4;color:#4e4d4c">Center for Geospatial Analytics, North Carolina State University<br>OpenPlains Inc.</span>
+  </div>
+  <div style="position:absolute;right:330px;top:790px;display:flex;align-items:center;justify-content:flex-end;gap:56px">
+    <img src="assets/osgeo_logo.svg" alt="OSGeo" style="height:78px;width:auto">
+    <img src="assets/numfocus_logo.svg" alt="NumFOCUS" style="height:78px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Welcome. State of GRASS, FOSS4G NA 2026 in Sacramento. This is a community update: release, Python, community, governance, and what is next.</aside>
+</section>
+
+<section id="corey-t-white" data-label="Corey T. White">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 560px;gap:90px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Speaker</div>
+      <h1 style="margin:0;font-size:84px;font-weight:700;line-height:1.1;color:#4cb05b">Corey T. White</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:26px;font-size:38px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:18px;background:#4cb05b"></span><span>Geospatial Research Software Engineer, Center for Geospatial Analytics, NC State</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:18px;background:#4cb05b"></span><span>Founder &amp; CEO, OpenPlains Inc.</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:18px;background:#4cb05b"></span><span>GRASS maintainer</span></li>
+    </ul>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 40px;font-size:28px;line-height:1.3">
+      <a target="_blank" rel="noopener" href="https://cnr.ncsu.edu/geospatial/people/corey-white/" style="color:#088b36">cnr.ncsu.edu/geospatial/people/corey-white</a>
+      <a target="_blank" rel="noopener" href="https://openplains.com" style="color:#088b36">openplains.com</a>
+      <a target="_blank" rel="noopener" href="https://github.com/cwhite911" style="color:#088b36">github.com/cwhite911</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:28px;align-items:center">
+    <div class="slot slot-circle" id="s2-portrait" style="width: 454px; height: 454px;--slot-radius:12px"><img src="assets/corey_white.jpg" alt="Corey T. White" style="object-fit:cover"></div>
+    <div style="display:flex;gap:40px;align-items:center;justify-content:center;align-self:stretch;margin-top:12px">
+      <img src="assets/cga_logo.webp" alt="Center for Geospatial Analytics, NC State University" style="height:96px;width:auto">
+      <img src="assets/openplains_logo.png" alt="OpenPlains Inc." style="height:120px;width:auto">
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Quick intro: CGA at NC State, OpenPlains, GRASS maintainer and PSC-adjacent work.</aside>
+</section>
+
+<section id="what-is-grass" data-label="What is GRASS">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:44px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Introduction</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">What is GRASS</h1>
+    <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.35;color:#4a787d">An open-source geospatial processing engine for raster, vector, 3D, imagery, and time series</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:40px 44px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:88px;font-weight:700;line-height:1;color:#4cb05b">500+</span>
+      <span style="font-size:32px;line-height:1.3;color:#4e4d4c">Core tools</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:40px 44px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:88px;font-weight:700;line-height:1;color:#4cb05b">500+</span>
+      <span style="font-size:32px;line-height:1.3;color:#4e4d4c">Contributor addons</span>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:20px">
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">Python API</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">Jupyter</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">R (rgrass)</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">C API</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">Command line</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">GUI</span>
+    <span style="font-size:30px;font-weight:500;padding:14px 28px;border-radius:4px;background:#00393f;color:#f7f7f7">QGIS plugin</span>
+  </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#002024;aspect-ratio:16/9"><video src="assets/grass-explainer.mp4" controls playsinline preload="metadata" style="display:block;width:100%;height:100%"></video></div>
+    <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">GRASS explainer, 30 seconds</p>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">GRASS is a geospatial processing engine, under continuous development since 1982. 500+ core tools, 500+ addons. Used from Python, R, Jupyter, the command line, and the GUI. Play the 30-second explainer, or skip it if time is short; reveal.js pauses it when you leave the slide.</aside>
+</section>
+
+<section id="release-status" data-label="Release status">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Release</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Release status</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;align-items:stretch">
+    <div style="background:#4cb05b;color:#ffffff;border-radius:4px;padding:48px 52px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:30px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase">Current</span>
+      <span style="font-size:112px;font-weight:700;line-height:1">8.5.0</span>
+      <span style="font-size:34px;line-height:1.35">May 8, 2026 · 2,570+ changes · two years in the making</span>
+      <span style="font-size:30px;line-height:1.35;margin-top:auto">First release under the refreshed GRASS branding</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:48px 44px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:30px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Preview</span>
+      <span style="font-size:96px;font-weight:700;line-height:1;color:#27575c">8.6</span>
+      <span style="font-size:32px;line-height:1.35;color:#4e4d4c">Daily builds · Python 3.11+ · Jupyter notebooks inside the GUI already merged</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:48px 44px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:30px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#4e4d4c">Previous</span>
+      <span style="font-size:96px;font-weight:700;line-height:1;color:#4a787d">8.4.2</span>
+      <span style="font-size:32px;line-height:1.35;color:#4e4d4c">November 2025 · maintenance release</span>
+    </div>
+  </div>
+  <p style="margin:0;font-size:32px;line-height:1.4;color:#4e4d4c">Requirements now: GDAL 3.7+, PROJ 9.0+, C++17, Python 3.10+.</p>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">8.5.0 shipped May 8, 2026: 2570+ changes, two years of work. 8.4.2 (Nov 2025) is the previous stable line. 8.6 is in development: the milestone is about 85 percent closed with no date set; it raises the minimum to Python 3.11, and Jupyter-in-GUI is already merged.</aside>
+</section>
+
+<section id="python-api-grass-tools" data-label="Python API: grass.tools">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Python API: grass.tools</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:34px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Tools as native Python functions</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Direct NumPy array and raster pack I/O</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Smart return values, proper exceptions</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>RegionManager and MaskManager context managers in grass.script</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Václav Petráš and Anna Petrášová, with Natrx · NSF SBIR #2322073</p>
+  </div>
+  <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:44px 48px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.55;white-space:pre-wrap;overflow:hidden">import numpy as np
+from grass.tools import Tools
+
+tools = Tools()
+tools.g_region(raster="elevation")
+tools.r_slope_aspect(
+    elevation="elevation",
+    slope="slope",
+)
+stats = tools.r_univar(
+    map="slope", format="json"
+)
+print(stats["mean"])
+
+array = tools.r_mapcalc_simple(
+    expression="A * 2", a="slope",
+    output=np.array,
+)</pre>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">The headline for Python users. grass.tools exposes GRASS tools as Python functions with NumPy I/O, parsed return values, and exceptions. Developed by Vaclav Petras and Anna Petrasova with Natrx under NSF SBIR 2322073.</aside>
+</section>
+
+<section id="json-for-text-outputs" data-label="JSON for text outputs">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">JSON for text outputs</h1>
+      <h2 style="margin:0;font-size:38px;font-weight:200;line-height:1.35;color:#4a787d">format="json" in dozens of tools, nearly everywhere a tool prints text</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">g.list</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">g.region</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.info</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.univar</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.stats</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.report</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.info</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.what</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.db.select</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">t.rast.list</span>
+    </div>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">Led by Anna Petrášová, Václav Petráš, Corey White, Edouard Choinière, Nicklas Larsson, Markus Metz · GSoC: Nishant Bansal, Kriti Birda</p>
+  </div>
+  <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:44px 48px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.55;white-space:pre-wrap;overflow:hidden">$ r.univar map=elevation format=json
+
+import grass.script as gs
+
+data = gs.parse_command(
+    "v.db.select",
+    map="roadsmajor",
+    format="json",
+)
+for row in data["records"]:
+    print(row["ROAD_NAME"])</pre>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Dozens of tools now take format=json: g.list, g.region, r.info, r.univar, r.stats, r.report, v.info, v.what and more. Led by Anna, Vashek, me, Edouard, Nicklas, Markus Metz; big GSoC contributions from Nishant Bansal and Kriti Birda.</aside>
+</section>
+
+<section id="new-documentation" data-label="New documentation">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:600px 1fr;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">New documentation</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:34px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Rewritten in Markdown, rendered with MkDocs</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Synopsis and parameters three ways: command line, grass.tools, grass.script</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Better search and indexing, user and developer pages together</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Martin Landa, Markus Neteler, Corey White, Václav Petráš, Anna Petrášová and others</p>
+  </div>
+  <div style="height:600px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff">
+    <div class="slot slot-rect" id="s7-docs" style="--slot-radius:12px"><img src="assets/remote/grass_8_5_doc_tabs.png" alt="" style="object-fit:contain"></div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Entire manual rewritten in Markdown, rendered with MkDocs. Every tool page shows the synopsis and parameters three ways: command line, grass.tools, grass.script. Martin Landa, Markus Neteler, Corey White, Vashek, Anna and many others.</aside>
+</section>
+
+<section id="parallelization-and-masks" data-label="Parallelization and masks">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Parallelization and masks</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">Parallel by default</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.mapcalc</span> is parallelized; dependent tools benefit</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>OpenMP in <span style="font-family:'Fira Mono',monospace;color:#00393f">r.texture</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.horizon</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">v.surf.rst</span> cross-validation</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">nprocs</span> added to r.blend, r.grow, r.mapcalc.simple, i.image.mosaic</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>OpenMP tools now default to all available cores</span></li>
+      </ul>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">Multiple masks per mapset</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Masks driven by <span style="font-family:'Fira Mono',monospace;color:#00393f">GRASS_MASK</span>, so concurrent masks work in one mapset</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Required changes in the C libraries; benefits every interface</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>New <span style="font-family:'Fira Mono',monospace;color:#00393f">r.mask.status</span> reports mask presence</span></li>
+      </ul>
+      <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:28px 32px;font-family:'Fira Mono',monospace;font-size:28px;line-height:1.5;white-space:pre-wrap">with gs.MaskManager(mask_name="lakes"):
+    tools.r_univar(map="elevation")</pre>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">r.mapcalc parallelized, benefiting everything built on it. OpenMP in r.texture, r.horizon raster mode, v.surf.rst CV. nprocs extended. Multiple masks per mapset via GRASS_MASK; context managers in grass.script.</aside>
+</section>
+
+<section id="build-and-install" data-label="Build and install">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Build and install: CMake, MSVC, conda-forge</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:40px 44px;display:flex;flex-direction:column;gap:14px">
+      <span style="font-size:44px;font-weight:500;color:#27575c">CMake</span>
+      <span style="font-size:30px;line-height:1.35;color:#4e4d4c">Full support for GRASS and addons, alongside Autotools. Multi-year effort.</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:40px 44px;display:flex;flex-direction:column;gap:14px">
+      <span style="font-size:44px;font-weight:500;color:#27575c">MSVC</span>
+      <span style="font-size:30px;line-height:1.35;color:#4e4d4c">Native Windows builds with the Microsoft Visual C++ compiler.</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:40px 44px;display:flex;flex-direction:column;gap:14px">
+      <span style="font-size:44px;font-weight:500;color:#27575c">conda-forge</span>
+      <span style="font-size:30px;line-height:1.35;color:#4e4d4c">Windows, Linux, macOS Intel and Apple Silicon since May 27, 2026.</span>
+    </div>
+  </div>
+  <pre style="margin:0;background:#00393f;color:#f7f7f7;border-radius:4px;padding:40px 48px;font-family:'Fira Mono',monospace;font-size:40px;line-height:1.5;white-space:pre-wrap">conda install -c conda-forge grass</pre>
+  <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">Led by Huidae Cho and Nicklas Larsson, building on initial work by Rashad Kanavath · NSF POSE #2303651</p>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Full CMake support alongside Autotools, MSVC builds on Windows, and GRASS on conda-forge for Windows, Linux, macOS Intel and Apple Silicon since May 27, 2026. Huidae Cho and Nicklas Larsson led this, building on Rashad Kanavath's work. Funded in part by NSF POSE 2303651.</aside>
+</section>
+
+<section id="grass-jupyter-and-gui" data-label="grass.jupyter and GUI">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">grass.jupyter and GUI</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;font-size:32px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>InteractiveMap: query button, drawing simple geometries, interactive region updates</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Parallel TimeSeriesMap and SeriesMap; Map3D.save()</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>GUI: add projects in the Data Catalog, dockable Python editor, copy from command history</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Coming in 8.6: Jupyter notebooks inside the GUI</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">GUI work by Martin Landa, Tomáš Zigo, Ondřej Pešek, Anna Petrášová, Linda Karlovská and others</p>
+  </div>
+  <div style="height:580px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff">
+    <div class="slot slot-rect" id="s10-jupyter" style="--slot-radius:12px"><img src="assets/remote/grass_tools_jupyter_watershed.png" alt="" style="object-fit:contain"></div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">grass.jupyter: query button, drawing geometries, interactive region updates, parallel TimeSeriesMap/SeriesMap, Map3D save. GUI: projects in Data Catalog, dockable Python editor, history panel copy, column stats on filtered rows. Jupyter notebooks inside the GUI merged at San Michele, ships in 8.6.</aside>
+</section>
+
+<section id="addons-r-dem" data-label="Addons: r.dem">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Addons</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Addons: <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem</span> toolset</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Ten tools for DEM co-registration, differencing, and uncertainty</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Co-registration: <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.coregister</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.icp</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.nk</span></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Change: <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.dod</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.change</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.screen</span></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Uncertainty: <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.lod</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.errprop</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.bias</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.dem.stats</span></span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Corey T. White, OpenPlains Inc. and Center for Geospatial Analytics</p>
+  </div>
+  <div style="height:580px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s12a-rdem" style="--slot-radius:12px"><img src="assets/slots/s12a-rdem.webp" alt="" style="object-fit:cover"></div></div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">My r.dem toolset: ten tools for DEM co-registration and change detection, built for post-Helene SfM vs LiDAR comparison. Drop a DoD figure here.</aside>
+</section>
+
+<section id="addons-i-hyper" data-label="Addons: i.hyper">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Addons</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Addons: <span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper</span> hyperspectral toolset</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Import, correct, resample, explore, and export hyperspectral 3D rasters</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.import</span> · <span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.atcorr</span> 6SV2.1 atmospheric correction</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.specresamp</span> · <span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.composite</span> · <span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.explore</span></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">i.hyper.export</span> to GeoTIFF, HDF5, Zarr · PRISMA, EnMAP, Tanager import · EMIT in progress</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Alen Mangafić and Tomaž Žagar, Geodetic Institute of Slovenia</p>
+  </div>
+  <div style="height:580px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s12b-ihyper" style="--slot-radius:12px"><img src="assets/remote/i.hyper_example.jpg" alt="" style="object-fit:cover"></div></div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">i.hyper hyperspectral toolset from Alen Mangafic and Tomaz Zagar: import, preprocessing, atmospheric correction, spectral resampling, composites, export. PRISMA, EnMAP, and Tanager import are merged; EMIT import is an open PR.</aside>
+</section>
+
+<section id="addons-terrain" data-label="Addons: terrain">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Addons</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Addons: terrain modeling</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Shape, flatten, and print terrain</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.earthworks</span> cut-and-fill landform modeling</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.hydro.flatten</span> water-surface elevations for hydro-flattened DEMs</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.out.3mf</span> export DEMs to 3MF or STL for 3D printing</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family: &quot;Fira Mono&quot;, monospace; color: rgb(0, 57, 63);">r.slopeunits</span><span style="font-family: &quot;Fira Mono&quot;, monospace; color: rgb(0, 57, 63);"></span></span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Brendan Harmon, Anna Petrášová, Václav Petráš, Corey T. White, Ivan Marchesini, Massimiliano Alvioli and others</p>
+  </div>
+  <div style="display:grid;grid-template-rows:1fr 1fr;gap:24px;height:600px"><div style="height:288px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s12c-earthworks" style="--slot-radius:12px"><img src="assets/remote/r_earthworks_road.webp" alt="" style="object-fit:cover"></div></div><div style="height:288px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s12c-hydroflatten" style="--slot-radius:12px"><img src="assets/remote/hydroflatten.webp" alt="" style="object-fit:cover"></div></div></div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Terrain modeling: r.earthworks cut-and-fill (Brendan Harmon, JOSS paper), r.hydro.flatten for water surfaces, r.out.3mf for 3D printing, r.slopeunits.</aside>
+</section>
+
+<section id="addons-hydrology" data-label="Addons: hydrology">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Addons</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Addons: hydrology</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Event runoff, flood extent, and parallel watershed analysis</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.curvenumber</span> → <span style="font-family:'Fira Mono',monospace;color:#00393f">r.runoff</span> → <span style="font-family:'Fira Mono',monospace;color:#00393f">r.timeofconcentration</span> SCS-CN chain</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.noaa.atlas14</span> precipitation-frequency inputs · <span style="font-family:'Fira Mono',monospace;color:#00393f">r.manning</span> roughness</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.hand</span> height above nearest drainage and inundation</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.hydrobasin</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.lfp</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r.upflowlength</span> memory-efficient parallel algorithms</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Abdullah Azzam, Huidae Cho, Anna Petrášová, Corey White</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="height:560px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff;display:flex;align-items:center;justify-content:center"><img src="assets/simwe_depth_animation.gif" alt="SIMWE water depth animation for a 100-year storm" style="height:100%;width:auto"></div>
+    <a target="_blank" rel="noopener" href="https://ncsu-geoforall-lab.github.io/NRCS_SIMWE/notebooks/ssurgo.html" style="font-size:24px;line-height:1.35;color:#4e4d4c">SIMWE depth, 100-yr storm · NRCS SIMWE Soils Project, NC State GeoForAll Lab</a>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Hydrology from Abdullah Azzam and Huidae Cho: SCS curve-number runoff chain, HAND flood mapping, and the memory-efficient parallel family: r.hydrobasin, r.lfp, r.upflowlength.</aside>
+</section>
+
+<section id="r-sim-water" data-label="r.sim.water">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:60px 110px 190px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:30px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Core tools</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b"><span style="font-family:'Fira Mono',monospace;color:#00393f">r.sim.water</span> improvements</h1>
+      <h2 style="margin:0;font-size:34px;font-weight:200;line-height:1.35;color:#4a787d">SIMWE overland flow and sediment transport, corrected for parallel runs</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:28px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:13px;background:#4cb05b"></span><span>Broken <span style="font-family:'Fira Mono',monospace;color:#00393f">nblock</span> auto-split disabled; flagged as errata <a target="_blank" rel="noopener" href="https://github.com/OSGeo/grass/pull/7358" style="color:#088b36">#7358</a></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:13px;background:#4cb05b"></span><span>Parallel runs no longer skip walkers <a target="_blank" rel="noopener" href="https://github.com/OSGeo/grass/pull/7964" style="color:#088b36">#7964</a></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:13px;background:#4cb05b"></span><span>Water depth accumulated atomically; parallel runs had been losing 12–14% of water <a target="_blank" rel="noopener" href="https://github.com/OSGeo/grass/pull/7974" style="color:#088b36">#7974</a></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:13px;background:#4cb05b"></span><span>New pytest coverage with synthetic data; per-walker random numbers make results order-independent</span></li>
+    </ul>
+    <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">by Václav Petráš and Anna Petrášová · shipping in GRASS 8.6</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <span style="font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Two new tutorials</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+      <a target="_blank" rel="noopener" href="https://grass-tutorials.osgeo.org/content/tutorials/parallelization/SIMWE_parallelization.html" style="display:flex;flex-direction:column;gap:14px;color:inherit">
+        <div style="height:270px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s13-tut-parallel" style="--slot-radius:12px"><img src="assets/remote/basin_030401010402_simwe.webp" alt="" style="object-fit:cover"></div></div>
+        <span style="font-size:28px;font-weight:700;line-height:1.3;color:#27575c">Parallelization of overland flow and sediment transport simulation</span>
+        <span style="font-size:24px;line-height:1.35;color:#4e4d4c">Anna Petrášová · grass-tutorials.osgeo.org · Sep 2025, updated Jul 2026</span>
+      </a>
+      <a target="_blank" rel="noopener" href="https://grass-tutorials.osgeo.org/content/tutorials/soil_hydrology/soil_informed_overland_flow.html" style="display:flex;flex-direction:column;gap:14px;color:inherit">
+        <div style="height:270px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s13-tut-soil" style="--slot-radius:12px"><img src="assets/slots/s13-tut-soil.webp" alt="" style="object-fit:cover"></div></div>
+        <span style="font-size:28px;font-weight:700;line-height:1.3;color:#27575c">Estimating infiltration from soil survey data for overland flow modeling</span>
+        <span style="font-size:24px;line-height:1.35;color:#4e4d4c">Corey T. White · grass-tutorials.osgeo.org · merged Oct 22, 2026</span>
+      </a>
+    </div>
+    <p style="margin:0;font-size:24px;line-height:1.4;color:#4e4d4c">Tutorial figures © GRASS Development Team, CC-BY-SA 4.0</p>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">SIMWE correctness work for 8.6 by Vaclav Petras and Anna Petrasova: Anna's PR 7358 disabled the broken nblock split (May 2026, errata); PR 7964 fixed parallel runs skipping walkers; PR 7974 made depth accumulation atomic so parallel runs stop losing 12 to 14 percent of water; PR 7980 gave each walker its own random numbers, so results no longer depend on thread order. Two tutorials show the full chain: Anna's parallel subwatershed workflow (Sep 2025) and my soil-informed infiltration tutorial with SSURGO and ROSETTA (merged Oct 22, 2026).</aside>
+</section>
+
+<section id="addons-imagery-and-data" data-label="Addons: imagery and data">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 440px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Addons</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Addons: imagery and data access</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Segment, mask, and pull data straight into a project</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">i.sam2</span> text-prompt segmentation with SamGeo · <span style="font-family:'Fira Mono',monospace;color:#00393f">i.omnicloudmask</span> cloud and shadow masks</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">t.stac</span> browse and ingest STAC items, collections, catalogs</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">i.eodag</span> search and download Earth observation data from many providers through EODAG</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.in.ssurgo</span> USDA soils · <span style="font-family:'Fira Mono',monospace;color:#00393f">r.in.ahn.laz</span> Dutch LiDAR · <span style="font-family:'Fira Mono',monospace;color:#00393f">v.in.ags</span></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">r.colors.qml</span> and <span style="font-family:'Fira Mono',monospace;color:#00393f">r.colors.toqml</span> swap styles with QGIS</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">by Corey White, Paulo van Breugel, Luca Delucchi, Hamed Elgizery, Veronica Andreo, Stefan Blumentrath and others</p>
+  </div>
+  
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Imagery and data access: i.sam2 text-prompt segmentation, i.omnicloudmask cloud detection, t.stac for STAC catalogs, i.eodag for EO data download (GSoC 2024, Hamed Elgizery with Luca Delucchi, Veronica Andreo, Stefan Blumentrath), r.in.ssurgo soils, QGIS style exchange.</aside>
+</section>
+
+<section id="ecosystem-r-and-xarray" data-label="Ecosystem: R and xarray">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Ecosystem</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Ecosystem: R and xarray</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-family:'Fira Mono',monospace;font-size:44px;font-weight:700;color:#00393f">rgrass</span>
+      <span style="font-size:32px;line-height:1.35">R interface, now under the OSGeo GitHub organization</span>
+      <span style="font-size:28px;line-height:1.35;color:#4e4d4c;margin-top:auto">maintained by Steven Pawley</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-family:'Fira Mono',monospace;font-size:44px;font-weight:700;color:#00393f">fasterRaster</span>
+      <span style="font-size:32px;line-height:1.35">Fast raster and vector processing in R, powered by GRASS</span>
+      <span style="font-size:28px;line-height:1.35;color:#4e4d4c;margin-top:auto">by Adam B. Smith</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-family:'Fira Mono',monospace;font-size:44px;font-weight:700;color:#00393f">xarray-grass</span>
+      <span style="font-size:32px;line-height:1.35">An xarray backend for GRASS data, bridging to the Python data science stack</span>
+      <span style="font-size:28px;line-height:1.35;color:#4e4d4c;margin-top:auto">by Laurent Courty</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">rgrass moved to the OSGeo GitHub org, maintained by Steven Pawley. fasterRaster by Adam Smith. Laurent Courty's xarray-grass backend connects GRASS to the Python data science stack.</aside>
+</section>
+
+<section id="community" data-label="Community">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('assets/ds/banner.jpg') center/cover;clip-path:polygon(0 0, 41% 100%, 0 100%)"></div>
+  <div style="position:absolute;inset:0;background:#00393f;clip-path:polygon(100% 0, 100% 100%, 86% 100%)"></div>
+  <img src="assets/ds/grass-white.svg" alt="GRASS" style="position:absolute;left:96px;bottom:72px;width:240px;height:auto">
+  <div style="position:absolute;top:300px;right:330px;width:1000px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:24px">
+    <div style="font-size:32px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#4cb05b"><br></div>
+    <h1 style="margin:0;font-size:132px;font-weight:700;line-height:1;color:#27575c">Community</h1>
+    <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.35;color:#4a787d"><br></h2>
+  </div>
+</div>
+  <aside class="notes">Section: community.</aside>
+</section>
+
+<section id="community-by-the-numbers" data-label="Community by the numbers">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 820px;gap:70px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Community</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Community by the numbers</h1>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px 48px">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">70+</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">people committed during the 8.5 cycle</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">30+</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">first-time contributors in the release notes</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">44</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">contributors to the main repository in 2025</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">51K</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">Google Scholar citations; DOI references more than doubled in 2025</span></div>
+    </div>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">Top 2025 committers, per the Annual Report: Edouard Choinière (205), Shubham Desai (155), Václav Petráš (144), Anna Petrášová (91), Nicklas Larsson (90)</p>
+  </div>
+  <div style="height:620px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff">
+    <div class="slot slot-rect" id="s14-commit-chart" style="--slot-radius:12px"><img src="assets/slots/s14-commit-chart.webp" alt="" style="object-fit:contain"></div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Over the 8.5 cycle: 70+ committers, 30+ first-time contributors. 44 people in 2025. 51K Google Scholar citations; DOI references doubled in 2025. Top 2025 committers: Edouard Choiniere 205, Shubham Desai 155, Vashek 144, Anna 91, Nicklas 90. Drop the GitHub commit chart here.</aside>
+</section>
+
+<section id="meetings" data-label="Meetings">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:60px 110px 190px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Community</div>
+    <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Developer Summit 2025 and Community Meeting 2026</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="height:340px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden"><div class="slot slot-rect" id="s15-raleigh" style="--slot-radius:12px"><img src="assets/remote/NCSU_developer_summit_stairs.jpg" alt="" style="object-fit:cover"></div></div>
+      <h2 style="margin:0;font-size:40px;font-weight:500;color:#27575c">Raleigh, NC · May 19–24, 2025</h2>
+      <p style="margin:0;font-size:30px;line-height:1.4">30+ contributors, six days at NC State. Hyperspectral, xarray backend, Jupyter in the GUI, conda, CMake, tutorials.</p>
+      <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">Funding: NSF #2303651, Bohannan Huston, Inc., Center for Geospatial Analytics</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="height:340px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden"><div class="slot slot-rect" id="s15-sanmichele" style="--slot-radius:12px"><img src="assets/remote/grass_community_meeting_20260715.webp" alt="" style="object-fit:cover"></div></div>
+      <h2 style="margin:0;font-size:40px;font-weight:500;color:#27575c">San Michele all'Adige, Italy · July 11–19, 2026</h2>
+      <p style="margin:0;font-size:30px;line-height:1.4">139 PRs opened, 144 closed in nine days. 5 first-time contributors. Jupyter-in-GUI merged for 8.6.</p>
+      <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">Funding: OSGeo, Bohannan Huston, Inc., FOSSGIS e.V. · Host: Fondazione Edmund Mach · Organizer: Luca Delucchi</p>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Developer Summit 2025 at NC State: 30+ contributors, six days, NSF 2303651, Bohannan Huston, CGA. Community Meeting 2026 at Fondazione Edmund Mach, San Michele all'Adige, July 11-19: 139 PRs opened, 144 closed, 5 first-time contributors, Jupyter-in-GUI merged. Sponsors: OSGeo, Bohannan Huston, FOSSGIS e.V. Local organizer Luca Delucchi.</aside>
+</section>
+
+<section id="google-summer-of-code-2026" data-label="Google Summer of Code 2026">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Community</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Google Summer of Code 2026</h1>
+    <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.35;color:#4a787d">Both projects finished successfully with more than 30 merged pull requests, in GRASS's first year under the NumFOCUS umbrella</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Parallel rasters</span>
+      <span style="font-size:36px;font-weight:700;color:#27575c;line-height:1.2">Kaushik Raja</span>
+      <span style="font-size:30px;line-height:1.4"><span style="font-family:'Fira Mono',monospace;color:#00393f">r.param.scale</span> and <span style="font-family:'Fira Mono',monospace;color:#00393f">r.geomorphon</span> on multiple cores; fixed a data race in the math library dating to 2012</span>
+      <span style="font-size:26px;line-height:1.35;color:#4e4d4c;margin-top:auto">Mentors: Huidae Cho, Anna Petrášová, Václav Petráš</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Time series in the GUI</span>
+      <span style="font-size:36px;font-weight:700;color:#27575c;line-height:1.2">Saket Kumar Mall</span>
+      <span style="font-size:30px;line-height:1.4">Bringing the temporal framework into the graphical interface; dockable Animation tool; faster listing of mapsets with many datasets</span>
+      <span style="font-size:26px;line-height:1.35;color:#4e4d4c;margin-top:auto">Mentors: Anna Petrášová, Stefan Blumentrath</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Both GSoC 2026 projects finished successfully, 30+ merged PRs. Kaushik Raja: parallel r.param.scale and r.geomorphon, plus fixing a 2012-era data race. Saket Kumar Mall: time series in the GUI, mentored by Anna and Stefan Blumentrath. First year GRASS ran GSoC under NumFOCUS rather than OSGeo. The pytest migration is ongoing community work, not a GSoC project; it is on the roadmap slide.</aside>
+</section>
+
+<section id="ai-assisted-contributions" data-label="AI-assisted contributions">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Community</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">AI-assisted contributions</h1>
+    </div>
+    <blockquote style="margin:0;padding:0 0 0 36px;background:transparent;border-left:6px solid #4cb05b;font-size:38px;font-weight:400;line-height:1.4;color:#27575c">We look forward [...] to welcoming new contributors, including those who make careful and responsible use of generative AI.</blockquote>
+    <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">GRASS Annual Report 2025</p>
+  </div>
+  <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:26px;font-size:34px;line-height:1.35">
+    <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>AI tools may be used; every contribution must meet GRASS quality standards regardless of how it was created</span></li>
+    <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Test it, understand it, describe it in your own words, and take responsibility for it</span></li>
+    <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Disclose AI assistance for substantial generated logic or when licensing is unclear</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Closed without review: untested code, verbose AI-generated descriptions, no understanding of the submission</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>OSGeo/grass-mcp: a Model Context Protocol server for GRASS, started October 2026, early and open for contributors</span></li></li>
+  </ul>
+  <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">github.com/OSGeo/grass/blob/main/CONTRIBUTING.md · AI use policy</p>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">The project's stance in two places: the 2025 annual report welcomes newcomers who use generative AI carefully and responsibly, and CONTRIBUTING.md has an explicit AI use policy (strengthened March 2026, PR 7120; AGENTS.md linked June 2026). Using AI to learn is encouraged; using it to bypass understanding is not. On the tooling side, I started OSGeo/grass-mcp in October: an MCP server that lets agents run GRASS raster, vector, and imagery tools. Early days, contributors welcome.</aside>
+</section>
+
+<section id="governance" data-label="Governance">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('assets/ds/banner.jpg') center/cover;clip-path:polygon(0 0, 41% 100%, 0 100%)"></div>
+  <div style="position:absolute;inset:0;background:#00393f;clip-path:polygon(100% 0, 100% 100%, 86% 100%)"></div>
+  <img src="assets/ds/grass-white.svg" alt="GRASS" style="position:absolute;left:96px;bottom:72px;width:240px;height:auto">
+  <div style="position:absolute;top:300px;right:330px;width:1000px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:24px">
+    <div style="font-size:32px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#4cb05b">Part three</div>
+    <h1 style="margin:0;font-size:132px;font-weight:700;line-height:1;color:#27575c">Governance</h1>
+    <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.35;color:#4a787d"><br></h2>
+  </div>
+</div>
+  <aside class="notes">Section: governance.</aside>
+</section>
+
+<section id="psc-elections-2026" data-label="PSC elections 2026">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:44px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Governance</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">PSC elections 2026</h1>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">5</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">seats up for renewal</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">8</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">candidates</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:84px;font-weight:700;line-height:1;color:#4cb05b">6 yr</span><span style="font-size:28px;line-height:1.3;color:#4e4d4c">terms, staggered elections</span></div>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Nominations: Sep 28 – Oct 19 · Candidate statements: Oct 19 – 26</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Voting: Nov 2 – 9 · Results announced by Nov 14</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Chief Return Officer: Hernán De Angelis</span></li>
+    </ul>
+    <p style="margin:0;font-size:30px;line-height:1.4;color:#4e4d4c">Voting is open this week. If you have contributed to GRASS, check your inbox for a ballot.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Candidates</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:30px;line-height:1.3">
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><img src="assets/remote/Anna_Petrasova_PSC.jpg" alt="Anna Petrášová" style="flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover"><span style="font-weight:500;color:#27575c">Anna Petrášová</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><img src="assets/remote/Vaclav_Petras_PSC.jpg" alt="Václav Petráš" style="flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover"><span style="font-weight:500;color:#27575c">Václav Petráš</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><img src="assets/remote/Veronica_Andreo_PSC_Chair.jpg" alt="Verónica Andreo" style="flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover"><span style="font-weight:500;color:#27575c">Verónica Andreo</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><img src="assets/remote/Huidae_Cho_PSC.jpg" alt="Huidae Cho" style="flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover"><span style="font-weight:500;color:#27575c">Huidae Cho</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><div class="slot slot-circle" id="s19-choiniere" style="flex:none;width:88px;height:88px;--slot-radius:12px"><img src="assets/slots/s19-choiniere.webp" alt="" style="object-fit:cover"></div><span style="font-weight:500;color:#27575c">Edouard Choinière</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><div class="slot slot-circle" id="s19-mangafic" style="flex:none;width:88px;height:88px;--slot-radius:12px"><img src="assets/slots/s19-mangafic.webp" alt="" style="object-fit:cover"></div><span style="font-weight:500;color:#27575c">Alen Mangafić</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><div class="slot slot-circle" id="s19-harmon" style="flex:none;width:88px;height:88px;--slot-radius:12px"><img src="assets/slots/s19-harmon.webp" alt="" style="object-fit:cover"></div><span style="font-weight:500;color:#27575c">Brendan Harmon</span></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:14px 22px;background:#ffffff;border:1px solid #d8d8d8;border-radius:4px"><img src="https://avatars.githubusercontent.com/u/3803800?s=400&amp;v=4" alt="Corey White" style="flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover"><span style="font-weight:500;color:#27575c">Corey White</span></div>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Five seats up; eight candidates: Anna Petrasova, Vaclav Petras, Veronica Andreo, Huidae Cho, Edouard Choiniere, Alen Mangafic, Brendan Harmon, and me. Voting Nov 2-9, results by Nov 14. CRO Hernan De Angelis. Encourage contributors in the room to vote.</aside>
+</section>
+
+<section id="markus-neteler-steps-down" data-label="Markus Neteler steps down">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 560px;gap:90px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Governance</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Markus Neteler steps down from the PSC</h1>
+    </div>
+    <blockquote style="margin:0;padding:0 0 0 36px;background:transparent;border-left:6px solid #4cb05b;font-size:36px;font-weight:400;line-height:1.4;color:#27575c">After almost two decades on the PSC, I have decided not to stand for re-election and to step down from the PSC at the end of this term.</blockquote>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:64px;font-weight:700;line-height:1;color:#4cb05b">2006</span><span style="font-size:26px;line-height:1.3;color:#4e4d4c">PSC founding member</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:64px;font-weight:700;line-height:1;color:#4cb05b">14 yrs</span><span style="font-size:26px;line-height:1.3;color:#4e4d4c">as chair, 2006–2020</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:64px;font-weight:700;line-height:1;color:#4cb05b">8.5.0</span><span style="font-size:26px;line-height:1.3;color:#4e4d4c">release manager</span></div>
+    </div>
+    <p style="margin:0;font-size:30px;line-height:1.4;color:#4e4d4c">Markus remains active in the project and will keep contributing and supporting the community. Thank you, Markus.</p>
+  </div>
+  <div class="slot slot-circle" id="s20-markus-v2" style="width:360px;height:360px;--slot-radius:12px"><img src="assets/remote/Markus_Neteler_PSC.jpg" alt="" style="object-fit:cover"></div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Markus announced on Oct 26 he will not stand for re-election. On the PSC since its creation in 2006, chair 2006 to 2020, release manager for 8.5.0. He stays active in the project. Take a moment to thank him.</aside>
+</section>
+
+<section id="geomorphometry-2nd-edition" data-label="Geomorphometry, 2nd edition">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:480px 1fr;gap:90px;align-items:center">
+  <div class="slot slot-rounded" id="s21-book-cover" style="width:480px;height:660px;--slot-radius:4px"><img src="assets/slots/s21-book-cover.webp" alt="" style="object-fit:contain"></div>
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Publications</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Geomorphometry, 2nd edition</h1>
+      <h2 style="margin:0;font-size:40px;font-weight:200;line-height:1.35;color:#4a787d">Concepts, Software, Applications · Elsevier, September 2026</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:34px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Chapter 12: Geomorphometry in GRASS. Getting started, scripting, limitations, and future direction</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Chapter authors: Corey T. White, Helena Mitasova, Markus Neteler, Anna Petrasova, Jaroslav Hofierka</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Editors: Hannes I. Reuter, Carlos H. Grohmann, Vincent Lecours · Developments in Soil Science, vol. 37</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Companion talk: Geomorphometry with GRASS, ISG Coffee Talk, April 2026 · <a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.19403683" style="color:#088b36">doi.org/10.5281/zenodo.19403683</a></span></li>
+    </ul>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Geomorphometry: Concepts, Software, Applications, 2nd edition, Elsevier, September 2026, edited by Reuter, Grohmann, Lecours. Chapter 12 is Geomorphometry in GRASS: getting started, scripting, limitations and future direction. Related: my ISG Coffee Talk in April on Geomorphometry with GRASS.</aside>
+</section>
+
+<section id="publications" data-label="Publications">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:52px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Publications</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Publications over the past year</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:24px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Book chapter · Elsevier, 2026</span>
+      <span style="font-size:34px;font-weight:700;line-height:1.25;color:#27575c">Geomorphometry in GRASS</span>
+      <span style="font-size:28px;line-height:1.4;color:#4e4d4c">White, Mitasova, Neteler, Petrasova, Hofierka · in Geomorphometry: Concepts, Software, Applications, 2nd ed.</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:24px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Journal of Open Source Software · Feb 2026</span>
+      <span style="font-size:34px;font-weight:700;line-height:1.25;color:#27575c">r.earthworks: a GRASS tool for terrain modeling</span>
+      <span style="font-size:28px;line-height:1.4;color:#4e4d4c">Harmon, Petrasova, Petras · JOSS 11(118), 9270</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:24px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">Software release · Zenodo, May 2026</span>
+      <span style="font-size:34px;font-weight:700;line-height:1.25;color:#27575c">GRASS 8.5.0</span>
+      <span style="font-size:28px;line-height:1.4;color:#4e4d4c">DOI 10.5281/zenodo.20083515 · cite the version you use</span>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:24px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#088b36">REMOTE SENSING</span>
+      <span style="font-size:34px;font-weight:700;line-height:1.25;color:#27575c">Volumetric Change Detection with SfM Photogrammetry from Rapid-Response Aerial Imagery after Hurricane Helene</span>
+      <span style="font-size:28px;line-height:1.4;color:#4e4d4c">White, Regmi, Reckling, Mitasova · accepted Oct 2026, in press · the work behind the r.dem toolset</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:60px;align-items:baseline">
+    <div style="display:flex;align-items:baseline;gap:16px"><span style="font-size:64px;font-weight:700;line-height:1;color:#4cb05b">51K</span><span style="font-size:28px;color:#4e4d4c">Google Scholar citations of GRASS</span></div>
+    <div style="display:flex;align-items:baseline;gap:16px"><span style="font-size:64px;font-weight:700;line-height:1;color:#4cb05b">2×</span><span style="font-size:28px;color:#4e4d4c">DOI-based references to GRASS software in 2025</span></div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    
+  </div>
+</div>
+  <aside class="notes">Publications over the past year: the Geomorphometry chapter, r.earthworks in JOSS, the 8.5.0 software DOI, and the citation trend. 51K Google Scholar citations; DOI-based references to GRASS more than doubled in 2025.</aside>
+</section>
+
+<section id="for-the-long-term" data-label="For the long term">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Career and mental health investment</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">For the long term</h1>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:34px;line-height:1.35">
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Invest your time in technologies that stay and don't disappear in a couple of years</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Shell scripting, Python, GRASS: longevity, open source, platform independent</span></li>
+      <li style="display:flex;gap:22px;align-items:flex-start"><span style="flex:none;width:14px;height:14px;margin-top:16px;background:#4cb05b"></span><span>Versions update and features are added, but the general ideas stay the same</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:30px;font-weight:500;color:#088b36">GRASS 5.0 code from 2002, running as-is in 8.5:</span>
+    <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:36px 44px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.5;white-space:pre-wrap">r.mapcalc depr.bin="if((elev - fill)&lt; 0., 1, 0)"</pre>
+    <span style="font-size:30px;color:#4e4d4c">although there is a better way to write it:</span>
+    <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:36px 44px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.5;white-space:pre-wrap">r.mapcalc "depr_bin = if((elev - fill) &lt; 0., 1, 0)"</pre>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">The career slide from last year, still true. Invest in technologies that stay. GRASS 5 code from 2002 still runs in 8.5; there is a nicer way to write it now, but it works.</aside>
+</section>
+
+<section id="funding-and-sponsors" data-label="Funding and sponsors">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:52px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Governance</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Funding and sponsors</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:22px">
+      <h2 style="margin:0;font-size:40px;font-weight:200;color:#4a787d">Grants and companies</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>NSF POSE #2303651, led by NC State: infrastructure, guidelines, community</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>NSF SBIR #2322073, led by Natrx: grass.tools Python API</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Bohannan Huston, Inc. · mundialis · OpenPlains Inc. · FOSSGIS e.V. · OSGeo · individual donors</span></li>
+      </ul>
+      <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c">Grants fund infrastructure and new capabilities, not ongoing maintenance.</p>
+    </div>
+    <div style="background:#ffffff;border:1px solid #d8d8d8;border-radius:4px;padding:44px 48px;display:flex;flex-direction:column;gap:22px">
+      <h2 style="margin:0;font-size:40px;font-weight:200;color:#4a787d">NumFOCUS fiscal sponsorship</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>GRASS is an OSGeo Project and a NumFOCUS Fiscally Sponsored Project</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Invoicing for corporate sponsors; first invoice created and paid in 2025</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:14px;background:#4cb05b"></span><span>Goal: a budget that directly supports ongoing maintenance</span></li>
+      </ul>
+      <a target="_blank" rel="noopener" href="https://numfocus.org/donate-to-grass" style="margin-top:auto;align-self:flex-start;font-size:30px;font-weight:700;padding:18px 36px;border-radius:4px;background:#f3398a;color:#ffffff">numfocus.org/donate-to-grass</a>
+    </div>
+  </div>
+  
+
+  
+</div>
+  <aside class="notes">Funding behind 8.5: NSF POSE 2303651 led by NC State; NSF SBIR 2322073 led by Natrx; Bohannan Huston, mundialis, OpenPlains, individual donors. NumFOCUS is now the fiscal sponsor: first invoice created and paid in 2025. Goal: a budget that supports ongoing maintenance.</aside>
+</section>
+
+<section id="cesium-ecosystem-grant" data-label="Cesium Ecosystem Grant">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Funding</div>
+      <h1 style="margin:0;font-size:64px;font-weight:700;line-height:1.1;color:#4cb05b">Cesium Ecosystem Grant</h1>
+      <h2 style="margin:0;font-size:36px;font-weight:200;line-height:1.35;color:#4a787d">Bringing 3D Tiles to GRASS through grass.jupyter</h2>
+    </div>
+    <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:30px;line-height:1.35">
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Native OGC 3D Tiles 1.1 export: <span style="font-family:'Fira Mono',monospace;color:#00393f">r.out.3dtiles</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">v.out.3dtiles</span>, <span style="font-family:'Fira Mono',monospace;color:#00393f">r3.out.3dtiles</span></span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span><span style="font-family:'Fira Mono',monospace;color:#00393f">Map3DTiles</span> in grass.jupyter: interactive 3D analysis results in a notebook cell, Colab included</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Tilesets open in CesiumJS, QGIS, deck.gl, and Three.js; validated in CI with the 3D Tiles and glTF validators</span></li>
+      <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Lands in GRASS core under the project's review, CI, and release process</span></li>
+    </ul>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">Awarded to the Center for Geospatial Analytics, NC State · Corey T. White (lead), Anna Petrasova, Vaclav Petras</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="height:520px;border:1px solid #d8d8d8;border-radius:4px;overflow:hidden;background:#ffffff"><div class="slot slot-rect" id="s29b-cesium-simwe"><img src="assets/cesium_simwe.png" alt="r.sim.water overland flow depth draped on 3D terrain in CesiumJS" style="object-fit:contain"></div></div>
+    <p style="margin:0;font-size:26px;line-height:1.4;color:#4e4d4c"><span style="font-family:'Fira Mono',monospace;color:#00393f">r.sim.water</span> overland flow depth on 3D terrain in CesiumJS, the one-off pipeline this grant turns into a supported workflow</p>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Cesium Ecosystem Grant, awarded to the Center for Geospatial Analytics at NC State, not OpenPlains. Team: me as lead, Anna Petrasova, Vaclav Petras. Cesium's earlier grants funded viewers (QGIS 3D Tiles reader and globe); this one funds the producer. GRASS will export OGC 3D Tiles 1.1 natively from rasters, vectors, and voxels, and grass.jupyter gets Map3DTiles for interactive 3D in a notebook. The image is r.sim.water output hand-piped into a CesiumJS dashboard for the USDA NRCS briefing; the grant makes that one command. Everything lands in GRASS core.</aside>
+</section>
+
+<section id="roadmap" data-label="Roadmap">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:52px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Looking ahead</div>
+    <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">Roadmap: GRASS 8.6 and beyond</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">In progress for 8.6</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Jupyter notebooks inside the GUI (merged)</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Test suite migration from gunittest to pytest</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Windows installer built in GitHub Actions; addons compiling on Windows CI</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>SBOM (CycloneDX) and SPDX license headers for supply-chain transparency</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>More parallel tools: r.param.scale, r.geomorphon</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>Reproducible random numbers for parallel tools: one seed, same result at any thread count</span></li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-size:44px;font-weight:200;color:#4a787d">Beyond 8.6</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:32px;line-height:1.35">
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4cb05b"></span><span>OGC 3D Tiles export and grass.jupyter Map3DTiles, funded by the Cesium Ecosystem Grant</span></li>
+        <li style="margin-top:10px;font-size:26px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#4a787d">Needs new funding</li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>Subcommand interfaces</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>No-project processing</span></li>
+        <li style="display:flex;gap:20px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;margin-top:15px;background:#4a787d"></span><span>Sustained maintenance of conda, CMake, and Windows packaging</span></li>
+      </ul>
+      <p style="margin:0;font-size:30px;line-height:1.4;color:#4e4d4c">Sources: Community Meeting 2026 report · Annual Report 2025</p>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">8.6: Jupyter notebooks in the GUI, pytest migration, Windows installer from GitHub Actions, SBOM and SPDX, parallel r.param.scale and r.geomorphon, and a libgis seed API so parallel tools (r.sim, v.random, r.surf.random, r.mapcalc rand) give the same result at any thread count. Beyond 8.6: 3D Tiles export is funded by the Cesium grant; subcommand interfaces, no-project processing, and sustained packaging maintenance still need funding. Sources: Community Meeting 2026 report and Annual Report 2025.</aside>
+</section>
+
+<section id="get-involved" data-label="Get involved">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:flex;flex-direction:column;gap:56px;overflow:hidden">
+  <img src="assets/ds/grass-green.svg" alt="GRASS" style="position:absolute;top:80px;right:110px;width:300px;height:auto">
+  <div style="display:flex;flex-direction:column;gap:16px;position:relative;max-width:1100px">
+    <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">Thanks to all those involved</div>
+    <h1 style="margin:0;font-size:96px;font-weight:700;line-height:1.05;color:#4cb05b">Get involved</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 60px;max-width:1150px;position:relative;font-size:34px;line-height:1.35">
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Learn</span><a target="_blank" rel="noopener" href="https://grass-tutorials.osgeo.org" style="color:#088b36">grass-tutorials.osgeo.org</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Talk</span><a target="_blank" rel="noopener" href="https://discourse.osgeo.org/c/grass/62" style="color:#088b36">discourse.osgeo.org/c/grass</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Contribute</span><a target="_blank" rel="noopener" href="https://github.com/OSGeo/grass" style="color:#088b36">github.com/OSGeo/grass · good first issues</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Support</span><a target="_blank" rel="noopener" href="https://numfocus.org/donate-to-grass" style="color:#f3398a">numfocus.org/donate-to-grass</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Wear it</span><a target="_blank" rel="noopener" href="https://www.redbubble.com/people/grassgis/shop" style="color:#088b36">redbubble.com/people/grassgis</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:500;color:#27575c">Hire help</span><a target="_blank" rel="noopener" href="https://grass.osgeo.org/support/commercial" style="color:#088b36">grass.osgeo.org/support/commercial</a></div>
+  </div>
+  <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative">
+    <p style="margin:0;font-size:30px;line-height:1.4;color:#4e4d4c"><br></p>
+    <div style="display:flex;align-items:center;gap:48px">
+      <img src="assets/remote/osgeo_logo_300.png" alt="OSGeo" style="height:72px;width:auto">
+      <img src="assets/remote/numfocusweblogo_orig-1.png" alt="NumFOCUS" style="height:60px;width:auto">
+    </div>
+  </div>
+</div>
+  <aside class="notes">Close: how to get involved. Tutorials, Discourse, good first issues, donate through NumFOCUS, swag shop. Thanks to everyone involved.</aside>
+</section>
+
+</div>
+</div>
+<script src="node_modules/reveal.js/dist/reveal.js"></script>
+<script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({
+  width: 1920,
+  height: 1080,
+  margin: 0,
+  minScale: 0.1,
+  maxScale: 2,
+  center: false,
+  hash: true,
+  controls: true,
+  progress: true,
+  slideNumber: 'c/t',
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  backgroundTransition: 'none',
+  pdfSeparateFragments: false,
+  plugins: [RevealNotes],
+});
+</script>
+</body>
+</html>

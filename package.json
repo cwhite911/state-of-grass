@@ -1,0 +1,14 @@
+{
+  "name": "state-of-grass-2026",
+  "version": "1.0.0",
+  "private": true,
+  "description": "State of GRASS 2026, FOSS4G North America, Sacramento. reveal.js deck.",
+  "scripts": {
+    "build": "python3 tools/build.py",
+    "start": "npm run build && http-server . -p 8000 -c-1 -o"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "reveal.js": "^5.2.1"
+  }
+}

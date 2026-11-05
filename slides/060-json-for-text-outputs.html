@@ -1,0 +1,42 @@
+<section id="json-for-text-outputs" data-label="JSON for text outputs">
+  <div class="slide" style="background:#ffffff;font-family:'Fira Sans',sans-serif;color:#021905;box-sizing:border-box;padding:70px 110px 200px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:28px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#088b36">New in 8.5</div>
+      <h1 style="margin:0;font-size:72px;font-weight:700;line-height:1.1;color:#4cb05b">JSON for text outputs</h1>
+      <h2 style="margin:0;font-size:38px;font-weight:200;line-height:1.35;color:#4a787d">format="json" in dozens of tools, nearly everywhere a tool prints text</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">g.list</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">g.region</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.info</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.univar</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.stats</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">r.report</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.info</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.what</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">v.db.select</span>
+      <span style="font-family:'Fira Mono',monospace;font-size:28px;padding:10px 20px;border-radius:4px;background:#f0f0f1;color:#00393f">t.rast.list</span>
+    </div>
+    <p style="margin:0;font-size:28px;line-height:1.4;color:#4e4d4c">Led by Anna Petrášová, Václav Petráš, Corey White, Edouard Choinière, Nicklas Larsson, Markus Metz · GSoC: Nishant Bansal, Kriti Birda</p>
+  </div>
+  <pre style="margin:0;background:#f0f0f1;color:#00393f;border-radius:4px;padding:44px 48px;font-family:'Fira Mono',monospace;font-size:30px;line-height:1.55;white-space:pre-wrap;overflow:hidden">$ r.univar map=elevation format=json
+
+import grass.script as gs
+
+data = gs.parse_command(
+    "v.db.select",
+    map="roadsmajor",
+    format="json",
+)
+for row in data["records"]:
+    print(row["ROAD_NAME"])</pre>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;inset:0;background:rgba(76,176,91,0.28);clip-path:polygon(0 12%, 100% 100%, 0 100%)"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,57,63,0.24);clip-path:polygon(100% 4%, 100% 100%, 17% 100%)"></div>
+    <img src="assets/ds/grass-white-no-text.svg" alt="" style="position:absolute;left:90px;bottom:28px;height:120px;width:auto">
+  </div>
+</div>
+  <aside class="notes">Dozens of tools now take format=json: g.list, g.region, r.info, r.univar, r.stats, r.report, v.info, v.what and more. Led by Anna, Vashek, me, Edouard, Nicklas, Markus Metz; big GSoC contributions from Nishant Bansal and Kriti Birda.</aside>
+</section>
