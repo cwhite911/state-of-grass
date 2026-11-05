@@ -1,0 +1,27 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^index\.html$
+      - id: end-of-file-fixer
+        exclude: ^index\.html$
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=6000]
+  - repo: local
+    hooks:
+      - id: biome-check
+        name: biome check
+        entry: npx --no-install biome check --write --no-errors-on-unmatched --files-ignore-unknown=true
+        language: system
+        types_or: [css, json, html, javascript, svg]
+        require_serial: true
+      - id: build-index
+        name: rebuild index.html from slides/
+        entry: python3 tools/build.py
+        language: system
+        pass_filenames: false
+        files: ^(slides/.*\.html|tools/(build\.py|template\.html))$

@@ -39,3 +39,32 @@ landscape orientation, no margins, and background graphics enabled.
 
 The deck was first converted from a Claude Design export; that converter has been
 retired now that `slides/` is edited directly.
+
+## Publish
+
+The deck is published to GitHub Pages at https://cwhite911.github.io/state-of-grass/
+by `.github/workflows/deploy-pages.yml`, which runs when a GitHub Release is
+published (or manually from the Actions tab). Releases are tagged `0.1.YYYYMMDD`
+with the date of the deck revision, for example:
+
+```sh
+gh release create 0.1.20261104 --title "0.1.20261104" --generate-notes
+```
+
+The workflow runs `npm run build` and `npm run dist`; `tools/dist.py` copies
+`index.html`, `favicon.svg`, `assets/`, `theme/`, and the reveal.js files from
+`node_modules/` into `dist/`, which is uploaded as the Pages artifact.
+
+## Lint
+
+Biome checks CSS, JSON, and the slide HTML (parse errors and a11y rules; the HTML
+formatter is off so inline-styled slides are left alone). pre-commit runs Biome,
+whitespace and YAML/JSON checks, and rebuilds `index.html` whenever a slide or the
+template changes, so a stale `index.html` fails the commit until it is re-staged.
+
+```sh
+pre-commit install          # once per clone
+pre-commit run --all-files  # same checks CI runs
+npm run lint                # Biome only
+npm run check               # Biome with fixes applied
+```
