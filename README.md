@@ -51,6 +51,10 @@ with the date of the deck revision, for example:
 gh release create 0.1.20261104 --title "0.1.20261104" --generate-notes
 ```
 
+The `github-pages` environment must allow deployments from tags (Settings > Environments >
+github-pages > Deployment branches and tags), otherwise the deploy job is rejected
+before it starts. This repo has a `*` tag rule alongside `main`.
+
 The workflow runs `npm run build` and `npm run dist`; `tools/dist.py` copies
 `index.html`, `favicon.svg`, `assets/`, `theme/`, and the reveal.js files from
 `node_modules/` into `dist/`, which is uploaded as the Pages artifact.
